@@ -1,5 +1,6 @@
 package jdbc_hikaricp.service;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,11 +32,24 @@ public class TitleService {
 	}
 	
 	public void createTitle(Title title) throws SQLException {
-		dao.insertTitle(ConnectionFactory.getConnection(), title);
+		Connection con = ConnectionFactory.getConnection();
+		con.setAutoCommit(false);
+		int res = dao.insertTitle(ConnectionFactory.getConnection(), title);
+		if (res == 1) {
+			con.commit();
+		}
+		else throw new RuntimeException();
+		
 	}
 	
 	public void removeTitle(Title title) throws SQLException {
-		dao.deleteTitle(ConnectionFactory.getConnection(), title);
+		Connection con = ConnectionFactory.getConnection();
+		con.setAutoCommit(false);
+		int res = dao.deleteTitle(ConnectionFactory.getConnection(), title);
+		if (res == 1) {
+			con.commit();
+		}
+		else throw new RuntimeException();
 	}
 	
 }

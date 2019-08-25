@@ -42,37 +42,37 @@ public class TitleDaoImpl implements TitleDao {
 	}
 
 	@Override
-	public void insertTitle(Connection con, Title title) throws SQLException {
+	public int insertTitle(Connection con, Title title) throws SQLException {
 		String sql = "insert into title(title_code, title_name) values(?, ?)";
 
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, title.getTitleCode());
 			pstmt.setString(2, title.getTitleName());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}
 	}
 
 	@Override
-	public void deleteTitle(Connection con, Title title) throws SQLException {
+	public int deleteTitle(Connection con, Title title) throws SQLException {
 		String sql = "delete from title where title_code=?";
 		
 		try(PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, title.getTitleCode());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}
 	}
 
 	@Override
-	public void updateTitle(Connection con, Title title) throws SQLException {
+	public int updateTitle(Connection con, Title title) throws SQLException {
 		String sql = "update title set title_name=? where title_code=?;";
 		
 		try(PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setString(1, title.getTitleName());
 			pstmt.setInt(2, title.getTitleCode());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}
 	}
 

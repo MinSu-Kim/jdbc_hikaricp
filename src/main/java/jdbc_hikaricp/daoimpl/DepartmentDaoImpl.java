@@ -49,7 +49,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	}
 
 	@Override
-	public void insertDepartment(Connection con, Department dept) throws SQLException {
+	public int insertDepartment(Connection con, Department dept) throws SQLException {
 		String sql = "insert into department(dept_code, dept_name, floor) values(?, ?, ?)";
 		
 		try(PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -57,23 +57,23 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			pstmt.setString(2, dept.getDeptName());
 			pstmt.setInt(3, dept.getFloor());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		} 
 	}
 
 	@Override
-	public void deleteDepartment(Connection con, Department dept) throws SQLException {
+	public int deleteDepartment(Connection con, Department dept) throws SQLException {
 		String sql = "delete from department where dept_code=?";
 		
 		try(PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, dept.getDeptCode());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}
 	}
 
 	@Override
-	public void updateDepartment(Connection con, Department dept) throws SQLException {
+	public int updateDepartment(Connection con, Department dept) throws SQLException {
 		String sql = "update department set dept_name=?, floor=? where dept_code=?;";
 		
 		try(PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -81,7 +81,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			pstmt.setInt(2, dept.getFloor());
 			pstmt.setInt(3, dept.getDeptCode());
 			LogUtil.prnLog(pstmt);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}		
 	}
 

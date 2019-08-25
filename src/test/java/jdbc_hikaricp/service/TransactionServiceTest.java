@@ -42,7 +42,6 @@ public class TransactionServiceTest extends AbstractTest {
 		service.addTitleDeparment(title, department);
 	}
 
-
 	@Test(expected = RuntimeException.class)
 	public void test4DeleteTitleDept() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
@@ -57,7 +56,7 @@ public class TransactionServiceTest extends AbstractTest {
 	public void test5DeleteTitleDept() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Title title = new Title();
-		title.setTitleCode(7);
+		title.setTitleCode(6);
 		title.setTitleName("무기계약");
 		Department department = new Department(10, "개발", 6);// fail
 		
@@ -68,7 +67,7 @@ public class TransactionServiceTest extends AbstractTest {
 	public void test6DeleteTitleDept() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Title title = new Title();
-		title.setTitleCode(7);
+		title.setTitleCode(6);
 		title.setTitleName("무기계약");
 		Department department = new Department(6, "H/W개발", 6);
 		service.removeTitleDeparment(title, department);

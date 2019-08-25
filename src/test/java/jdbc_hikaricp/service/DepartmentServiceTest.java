@@ -3,16 +3,16 @@ package jdbc_hikaricp.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import jdbc_hikaricp.AbstractTest;
 import jdbc_hikaricp.dto.Department;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentServiceTest extends AbstractTest {
 	private static DepartmentService service;
 	
@@ -21,21 +21,8 @@ public class DepartmentServiceTest extends AbstractTest {
 		service = DepartmentService.getInstance();
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-	}
-
 	@Test
-	public void testSelectDepartmentAll() {
+	public void test2SelectDepartmentAll() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		List<Department> list = service.selectDepartmentAll();
@@ -43,7 +30,7 @@ public class DepartmentServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testCreateDepartment() throws SQLException {
+	public void test1CreateDepartment() throws SQLException {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Department newDept = new Department(5, "총무", 40);
@@ -51,7 +38,7 @@ public class DepartmentServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testRemoveDepartment() throws SQLException {
+	public void test3RemoveDepartment() throws SQLException {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Department newDept = new Department(5);

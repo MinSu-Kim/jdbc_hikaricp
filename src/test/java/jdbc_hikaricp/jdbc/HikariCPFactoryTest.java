@@ -23,7 +23,7 @@ public class HikariCPFactoryTest extends AbstractTest {
 		ds = factory.getDataSource();
 	}
 
-	@Test
+/*	@Test
 	public void testGetDataSource() {
 		logger.trace("testPool()");
 
@@ -40,7 +40,7 @@ public class HikariCPFactoryTest extends AbstractTest {
 		}
 
 	}
-
+*/
 	public static void printDriverStats() {
 		HikariDataSource hds = (HikariDataSource) ds;
 		logger.trace(String.format("getMinimumIdle: %s", hds.getMinimumIdle()));
