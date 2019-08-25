@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import jdbc_hikaricp.dao.DepartmentDao;
 import jdbc_hikaricp.dto.Department;
 import jdbc_hikaricp.jdbc.LogUtil;
@@ -25,8 +22,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		DepartmentDaoImpl.instance = instance;
 	}
 
-	static final Logger log = LogManager.getLogger();
-	
+	private DepartmentDaoImpl() {}
+
 	@Override
 	public List<Department> selectDepartmentByAll(Connection con) throws SQLException {
 		List<Department> lists = null;

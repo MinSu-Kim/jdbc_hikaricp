@@ -1,11 +1,11 @@
 package jdbc_hikaricp.service;
 
-import static org.junit.Assert.fail;
-
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,15 +36,25 @@ public class DepartmentServiceTest extends AbstractTest {
 
 	@Test
 	public void testSelectDepartmentAll() {
-		fail("Not yet implemented");
+		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Department> list = service.selectDepartmentAll();
+		Assert.assertNotNull(list);
 	}
 
 	@Test
 	public void testCreateDepartment() throws SQLException {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Department newDept = new Department(4, "마케팅", 40);
+		Department newDept = new Department(5, "총무", 40);
 		service.createDepartment(newDept);
 	}
 
+	@Test
+	public void testRemoveDepartment() throws SQLException {
+		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Department newDept = new Department(5);
+		service.removeDepartment(newDept);
+	}
 }
