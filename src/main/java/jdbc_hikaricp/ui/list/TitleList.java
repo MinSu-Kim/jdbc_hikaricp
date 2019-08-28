@@ -1,8 +1,11 @@
 package jdbc_hikaricp.ui.list;
 
+import java.sql.SQLException;
+
 import javax.swing.SwingConstants;
 
 import jdbc_hikaricp.dto.Title;
+import jdbc_hikaricp.service.TitleService;
 
 @SuppressWarnings("serial")
 public class TitleList extends AbstractList<Title> {
@@ -28,6 +31,15 @@ public class TitleList extends AbstractList<Title> {
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] { "직책번호", "직책명"};
+	}
+
+	@Override
+	public void setItemList() {
+		try {
+			itemList = TitleService.getInstance().selectTitleAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

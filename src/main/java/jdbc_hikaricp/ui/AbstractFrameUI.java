@@ -29,8 +29,11 @@ public abstract class AbstractFrameUI<T> extends JFrame implements ActionListene
 	private JMenuItem mntmDelete;
 
 	public AbstractFrameUI(String title) {
+		initService();
 		initComponents(title);
 	}
+
+	protected abstract void initService();
 
 	private void initComponents(String title) {
 		setTitle(title);
@@ -70,7 +73,6 @@ public abstract class AbstractFrameUI<T> extends JFrame implements ActionListene
 		pList.setPopupMenu(popupMenu);
 
 		reloadList();
-		clearContent();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -98,15 +100,17 @@ public abstract class AbstractFrameUI<T> extends JFrame implements ActionListene
 	}
 
 	protected void reloadList() {
-		itemList = getListAll();
-		pList.setItemList(itemList);
+		pList.setItemList();
 		pList.reloadData();
 	}
 
 	protected void refreshUI() {
+		reloadItemList();
 		reloadList();
 		clearContent();
 	}
+
+	protected abstract void reloadItemList();
 
 	private void actionPerformedBtnUpdate(ActionEvent e) throws SQLException {
 		T updateDept = pContent.getItem();
@@ -141,7 +145,6 @@ public abstract class AbstractFrameUI<T> extends JFrame implements ActionListene
 	protected abstract AbstractPanel<T> createContentPanel();
 	
 	protected abstract void updateItem(T item) throws SQLException;
-	protected abstract List<T> getListAll();
 	protected abstract void clearContent();
 	protected abstract void deleteItem(T item) throws SQLException;
 	protected abstract void insertItem(T item) throws SQLException;

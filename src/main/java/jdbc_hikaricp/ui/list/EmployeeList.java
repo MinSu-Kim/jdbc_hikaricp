@@ -3,6 +3,7 @@ package jdbc_hikaricp.ui.list;
 import javax.swing.SwingConstants;
 
 import jdbc_hikaricp.dto.Employee;
+import jdbc_hikaricp.service.EmployeeService;
 
 @SuppressWarnings("serial")
 public class EmployeeList extends AbstractList<Employee> {
@@ -30,6 +31,11 @@ public class EmployeeList extends AbstractList<Employee> {
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] {"사원번호", "사원명", "급여", "부서", "성별", "입사일", "직책"};
+	}
+
+	@Override
+	public void setItemList() {
+		itemList = EmployeeService.getInstance().selectEmpAll();
 	}
 
 }

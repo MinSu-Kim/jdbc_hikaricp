@@ -105,18 +105,12 @@ public class DepartmentFrameUI extends JFrame implements ActionListener {
 	}
 
 	private void clearContent() {
-		pContent.clearComponent(deptList.size() == 0 ? 1 : deptList.size() + 1);
+		pContent.clearComponent(deptList == null ? 1 : deptList.size() + 1);
 	}
 
 	private void reloadList() {
-		try {
-			deptList = deptService.selectDepartmentAll();
-			pList.setItemList(deptList);
-			pList.reloadData();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
-		
+		pList.setItemList();
+		pList.reloadData();
 	}
 
 	private void refreshUI() throws SQLException {

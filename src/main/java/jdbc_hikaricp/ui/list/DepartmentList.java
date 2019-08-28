@@ -1,8 +1,11 @@
 package jdbc_hikaricp.ui.list;
 
+import java.sql.SQLException;
+
 import javax.swing.SwingConstants;
 
 import jdbc_hikaricp.dto.Department;
+import jdbc_hikaricp.service.DepartmentService;
 
 @SuppressWarnings("serial")
 public class DepartmentList extends AbstractList<Department> {
@@ -28,6 +31,15 @@ public class DepartmentList extends AbstractList<Department> {
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] { "부서번호", "부서명", "위치" };
+	}
+
+	@Override
+	public void setItemList() {
+		try {
+			itemList = DepartmentService.getInstance().selectDepartmentAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

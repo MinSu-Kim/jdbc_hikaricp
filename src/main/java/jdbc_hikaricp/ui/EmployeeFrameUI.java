@@ -1,7 +1,6 @@
 package jdbc_hikaricp.ui;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -20,7 +19,6 @@ public class EmployeeFrameUI extends AbstractFrameUI<Employee> {
 		super(title);
 		setBounds(100, 100, 550, 700);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		service = EmployeeService.getInstance();
 	}
 
 	@Override
@@ -46,14 +44,8 @@ public class EmployeeFrameUI extends AbstractFrameUI<Employee> {
 	}
 
 	@Override
-	protected List<Employee> getListAll() {
-		return service.selectEmpAll();
-	}
-
-	@Override
 	protected void clearContent() {
-		pContent.clearComponent(itemList.size() == 0 ? 1 : itemList.size() + 1);
-		
+		pContent.clearComponent(itemList == null ? 1 : itemList.size() + 1);
 	}
 
 	@Override
@@ -64,6 +56,16 @@ public class EmployeeFrameUI extends AbstractFrameUI<Employee> {
 	@Override
 	protected void insertItem(Employee item) {
 		service.createItem(item);
+	}
+
+	@Override
+	protected void initService() {
+		service = EmployeeService.getInstance();		
+	}
+
+	@Override
+	protected void reloadItemList() {
+		itemList = pList.getItemList();		
 	}
 
 }

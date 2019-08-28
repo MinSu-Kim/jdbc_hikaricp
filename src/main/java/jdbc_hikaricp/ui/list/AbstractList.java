@@ -43,9 +43,7 @@ public abstract class AbstractList<T> extends JPanel {
 		scrollPane.setComponentPopupMenu(popupMenu);
 	}
 
-	public void setItemList(List<T> itemList) {
-		this.itemList = itemList;
-	}
+	public abstract void setItemList();
 
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
@@ -103,4 +101,10 @@ public abstract class AbstractList<T> extends JPanel {
 		item = itemList.get(i);
 		return item;
 	}
+
+	public List<T> getItemList() {
+		return itemList;
+	}
+	
+	
 }

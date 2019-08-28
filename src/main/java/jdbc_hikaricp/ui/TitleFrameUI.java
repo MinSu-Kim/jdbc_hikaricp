@@ -1,7 +1,6 @@
 package jdbc_hikaricp.ui;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import jdbc_hikaricp.dto.Title;
 import jdbc_hikaricp.service.TitleService;
@@ -16,7 +15,6 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 	
 	public TitleFrameUI(String title) {
 		super(title);
-		titleService = TitleService.getInstance();
 	}
 	
 	@Override
@@ -31,17 +29,7 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 
 	@Override
 	protected void clearContent() {
-		pContent.clearComponent(itemList.size() == 0 ? 1 : itemList.size() + 1);
-	}
-	
-	@Override
-	public List<Title> getListAll(){
-		try {
-			return titleService.selectTitleAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+		pContent.clearComponent(itemList == null ? 1 : itemList.size() + 1);
 	}
 	
 	@Override
@@ -57,5 +45,15 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 	@Override
 	protected void deleteItem(Title item) throws SQLException {
 		titleService.removeTitle(item);
+	}
+
+	@Override
+	protected void initService() {
+		titleService = TitleService.getInstance();		
+	}
+
+	@Override
+	protected void reloadItemList() {
+		itemList = pList.getItemList();
 	}
 }
