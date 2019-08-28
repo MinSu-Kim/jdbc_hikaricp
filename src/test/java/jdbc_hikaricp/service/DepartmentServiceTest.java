@@ -22,7 +22,7 @@ public class DepartmentServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void test2SelectDepartmentAll() {
+	public void test2SelectDepartmentAll() throws SQLException {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		List<Department> list = service.selectDepartmentAll();

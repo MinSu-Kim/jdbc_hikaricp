@@ -7,6 +7,7 @@ import org.junit.runners.MethodSorters;
 import jdbc_hikaricp.AbstractTest;
 import jdbc_hikaricp.dto.Department;
 import jdbc_hikaricp.dto.Title;
+import jdbc_hikaricp.exception.TransactionException;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TransactionServiceTest extends AbstractTest {
@@ -42,7 +43,7 @@ public class TransactionServiceTest extends AbstractTest {
 		service.addTitleDeparment(title, department);
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = TransactionException.class)
 	public void test4DeleteTitleDept() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Title title = new Title(); // fail
@@ -52,7 +53,7 @@ public class TransactionServiceTest extends AbstractTest {
 		service.removeTitleDeparment(title, department);
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test  (expected = TransactionException.class) 
 	public void test5DeleteTitleDept() {
 		logger.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Title title = new Title();

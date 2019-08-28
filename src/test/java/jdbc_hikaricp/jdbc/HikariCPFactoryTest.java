@@ -1,13 +1,8 @@
 package jdbc_hikaricp.jdbc;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.zaxxer.hikari.HikariDataSource;
 

@@ -1,6 +1,5 @@
 package jdbc_hikaricp.service;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,35 +20,20 @@ public class TitleService {
 		dao = TitleDaoImpl.getInstance();
 	}
 	
-	public List<Title> selectTitleAll(){
-		List<Title> list = null;
-		try {
-			list= dao.selectTitleByAll(ConnectionFactory.getConnection());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+	public List<Title> selectTitleAll() throws SQLException{
+		return dao.selectTitleByAll(ConnectionFactory.getConnection());
 	}
 	
 	public void createTitle(Title title) throws SQLException {
-		Connection con = ConnectionFactory.getConnection();
-		con.setAutoCommit(false);
-		int res = dao.insertTitle(ConnectionFactory.getConnection(), title);
-		if (res == 1) {
-			con.commit();
-		}
-		else throw new RuntimeException();
-		
+		dao.insertTitle(ConnectionFactory.getConnection(), title);
 	}
 	
 	public void removeTitle(Title title) throws SQLException {
-		Connection con = ConnectionFactory.getConnection();
-		con.setAutoCommit(false);
-		int res = dao.deleteTitle(ConnectionFactory.getConnection(), title);
-		if (res == 1) {
-			con.commit();
-		}
-		else throw new RuntimeException();
+		dao.deleteTitle(ConnectionFactory.getConnection(), title);
 	}
-	
+
+	public void updateTitle(Title item) throws SQLException {
+		dao.updateTitle(ConnectionFactory.getConnection(), item);
+	}
+
 }

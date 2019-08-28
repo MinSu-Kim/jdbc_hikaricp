@@ -7,6 +7,15 @@ import jdbc_hikaricp.dao.EmployeeDao;
 import jdbc_hikaricp.dto.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+	private static final EmployeeDaoImpl instance = new EmployeeDaoImpl();
+
+	public static EmployeeDaoImpl getInstance() {
+		return instance;
+	}
+
+	private EmployeeDaoImpl() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public List<Employee> selectEmployeeByAll(Connection con) {
@@ -37,16 +46,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }
-
-
-
-
-
-
-
-
-
-

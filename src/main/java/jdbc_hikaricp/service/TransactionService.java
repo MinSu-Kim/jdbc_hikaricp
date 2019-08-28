@@ -9,6 +9,7 @@ import jdbc_hikaricp.daoimpl.DepartmentDaoImpl;
 import jdbc_hikaricp.daoimpl.TitleDaoImpl;
 import jdbc_hikaricp.dto.Department;
 import jdbc_hikaricp.dto.Title;
+import jdbc_hikaricp.exception.TransactionException;
 import jdbc_hikaricp.jdbc.ConnectionFactory;
 import jdbc_hikaricp.jdbc.LogUtil;
 
@@ -55,10 +56,10 @@ public class TransactionService {
 			res += titleDao.deleteTitle(con, title);
 			LogUtil.prnLog("removeTitleDeparment() res : " + res);
 			if (res == 2) con.commit();
-			else new SQLException();
+			else throw new SQLException();
 		} catch (SQLException e) {
 			rollback(con);
-			throw new RuntimeException(e.getCause());
+			throw new TransactionException("삭제 익셉션");
 		} finally {
 			close(con);
 		}
