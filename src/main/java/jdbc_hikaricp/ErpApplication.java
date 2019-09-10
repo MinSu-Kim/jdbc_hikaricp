@@ -21,11 +21,7 @@ public class ErpApplication extends JFrame implements ActionListener {
 	private JButton btnTitle;
 	private JButton btnDepartment;
 	private JButton btnEmp;
-	private Map<String, JFrame> map;
-	
-	private static final String TITLE_STR = "직책관리";
-	private static final String DEPT_STR = "부서관리";
-	private static final String EMP_STR = "사원관리";
+	private Map<ErpType, JFrame> map;
 	
 	public ErpApplication() {
 		createFrame();
@@ -34,9 +30,9 @@ public class ErpApplication extends JFrame implements ActionListener {
 
 	private void createFrame() {
 		map = new HashMap<>();
-		map.put(TITLE_STR, new TitleFrameUI(TITLE_STR));
-		map.put(DEPT_STR, new DepartmentFrameUI());
-		map.put(EMP_STR, new EmployeeFrameUI(EMP_STR));
+		map.put(ErpType.TITLE, new TitleFrameUI(ErpType.TITLE.getValue()));
+		map.put(ErpType.DEPT, new DepartmentFrameUI());
+		map.put(ErpType.EMP, new EmployeeFrameUI(ErpType.EMP.getValue()));
 	}
 
 	private void initComponents() {
@@ -48,15 +44,15 @@ public class ErpApplication extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 10, 0));
 
-		btnTitle = new JButton(TITLE_STR);
+		btnTitle = new JButton(ErpType.TITLE.getValue());
 		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
 
-		btnDepartment = new JButton(DEPT_STR);
+		btnDepartment = new JButton(ErpType.DEPT.getValue());
 		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 
-		btnEmp = new JButton(EMP_STR);
+		btnEmp = new JButton(ErpType.EMP.getValue());
 		btnEmp.addActionListener(this);
 		contentPane.add(btnEmp);
 	}
@@ -74,15 +70,15 @@ public class ErpApplication extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnTitle(ActionEvent e) {
-		map.get(TITLE_STR).setVisible(true);
+		map.get(ErpType.TITLE).setVisible(true);
 	}
 
 	protected void actionPerformedBtnDepartment(ActionEvent e) {
-		map.get(DEPT_STR).setVisible(true);
+		map.get(ErpType.DEPT).setVisible(true);
 	}
 
 	protected void actionPerformedBtnEmp(ActionEvent e) {
-		map.get(EMP_STR).setVisible(true);
+		map.get(ErpType.EMP).setVisible(true);
 	}
 
 }
